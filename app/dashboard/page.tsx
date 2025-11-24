@@ -1,223 +1,153 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { Building2, Calendar, Users, Clock, ArrowLeft, Home, FileText, Search, LayoutDashboard } from 'lucide-react';
+import { useState } from 'react';
+import { Home, FileText, Search, LayoutDashboard, BookOpen, CheckCircle2, Users, Shield, Zap, Clock, ChevronRight } from 'lucide-react';
 import { NavBar } from '@/components/ui/tubelight-navbar';
 
-interface Request {
-  id: string;
-  eventTitle: string;
-  status: string;
-  requestedDate: string;
-  startTime: string;
-  endTime: string;
-  attendeeCount: number;
-  partnershipType: string;
-  partner: {
-    orgName: string;
-    pocEmail: string;
-  };
-  hub: {
-    name: string;
-  };
-  createdAt: string;
-}
-
 export default function DashboardPage() {
-  const [requests, setRequests] = useState<Request[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [activeSection, setActiveSection] = useState('overview');
 
   const navItems = [
     { name: 'Home', url: '/', icon: Home },
     { name: 'Apply', url: '/apply', icon: FileText },
     { name: 'Track', url: '/track', icon: Search },
-    { name: 'Dashboard', url: '/dashboard', icon: LayoutDashboard }
+    { name: 'Docs', url: '/dashboard', icon: LayoutDashboard }
   ];
 
-  useEffect(() => {
-    loadRequests();
-  }, []);
-
-  const loadRequests = async () => {
-    try {
-      // For now, fetch directly from database via API
-      // In production, this would require authentication
-      const response = await fetch('/api/v1/requests');
-      
-      if (!response.ok) {
-        throw new Error('Failed to load requests');
-      }
-
-      const data = await response.json();
-      setRequests(data.data || []);
-    } catch (err: any) {
-      setError(err.message);
-      console.error('Error loading requests:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const getStatusColor = (status: string) => {
-    const colors: Record<string, string> = {
-      NEW: 'bg-blue-100 text-blue-800',
-      UNDER_REVIEW: 'bg-yellow-100 text-yellow-800',
-      APPROVED: 'bg-green-100 text-green-800',
-      REJECTED: 'bg-red-100 text-red-800',
-      SCHEDULED: 'bg-purple-100 text-purple-800',
-      COMPLETED: 'bg-gray-100 text-gray-800',
-    };
-    return colors[status] || 'bg-gray-100 text-gray-800';
-  };
-
-  const getTypeColor = (type: string) => {
-    const colors: Record<string, string> = {
-      SPEAKER: 'bg-indigo-100 text-indigo-800',
-      EVENT: 'bg-blue-100 text-blue-800',
-      RECRUITMENT: 'bg-green-100 text-green-800',
-      SPONSORSHIP: 'bg-purple-100 text-purple-800',
-      OTHER: 'bg-gray-100 text-gray-800',
-    };
-    return colors[type] || 'bg-gray-100 text-gray-800';
-  };
+  const sections = [
+    { id: 'overview', label: 'Overview', icon: BookOpen },
+    { id: 'features', label: 'Key Features', icon: Zap },
+    { id: 'process', label: 'Partnership Process', icon: Users },
+    { id: 'requirements', label: 'Requirements', icon: CheckCircle2 },
+    { id: 'security', label: 'Security', icon: Shield },
+  ];
 
   return (
     <div className="min-h-screen bg-[#0a0a0f]">
       <NavBar items={navItems} />
       <div className="pt-28 pb-12">
-        <div className="container mx-auto px-4 py-8">
-        {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Total Requests</p>
-                <p className="text-3xl font-bold text-gray-900">{requests.length}</p>
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div className="flex gap-8">
+            {/* Sidebar */}
+            <aside className="hidden lg:block w-64 flex-shrink-0">
+              <div className="sticky top-28 bg-[#13131a]/50 border border-white/10 rounded-xl p-4 backdrop-blur-sm">
+                <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Documentation</h3>
+                <nav className="space-y-1">
+                  {sections.map((section) => {
+                    const Icon = section.icon;
+                    return (
+                      <button
+                        key={section.id}
+                        onClick={() => setActiveSection(section.id)}
+                        className={\`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all \${
+                          activeSection === section.id
+                            ? 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20'
+                            : 'text-gray-400 hover:text-white hover:bg-white/5'
+                        }\`}
+                      >
+                        <Icon className="w-4 h-4" />
+                        {section.label}
+                      </button>
+                    );
+                  })}
+                </nav>
               </div>
-              <Calendar className="w-12 h-12 text-blue-500 opacity-20" />
-            </div>
-          </div>
-          
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">New</p>
-                <p className="text-3xl font-bold text-blue-600">
-                  {requests.filter(r => r.status === 'NEW').length}
-                </p>
-              </div>
-              <Clock className="w-12 h-12 text-blue-500 opacity-20" />
-            </div>
-          </div>
+            </aside>
 
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Under Review</p>
-                <p className="text-3xl font-bold text-yellow-600">
-                  {requests.filter(r => r.status === 'UNDER_REVIEW').length}
-                </p>
-              </div>
-              <Users className="w-12 h-12 text-yellow-500 opacity-20" />
-            </div>
-          </div>
+            {/* Main Content */}
+            <main className="flex-1 min-w-0">
+              <div className="bg-[#13131a]/50 border border-white/10 rounded-xl backdrop-blur-sm p-8">
+                <div className="prose prose-invert max-w-none">
+                  <h1 className="text-4xl font-bold text-white mb-4">ALX Partnership Documentation</h1>
+                  <p className="text-xl text-gray-400 mb-8">
+                    Welcome to the ALX Partnership Management System - A production-ready platform for managing partnerships.
+                  </p>
 
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Approved</p>
-                <p className="text-3xl font-bold text-green-600">
-                  {requests.filter(r => r.status === 'APPROVED').length}
-                </p>
-              </div>
-              <Building2 className="w-12 h-12 text-green-500 opacity-20" />
-            </div>
-          </div>
-        </div>
+                  {activeSection === 'overview' && (
+                    <div>
+                      <div className="grid md:grid-cols-2 gap-6 my-8">
+                        <div className="bg-indigo-500/10 border border-indigo-500/20 rounded-lg p-6">
+                          <Users className="w-8 h-8 text-indigo-400 mb-4" />
+                          <h3 className="text-lg font-semibold text-white mb-2">For Partners</h3>
+                          <p className="text-gray-400 text-sm">Submit requests, track status, collaborate with ALX hubs.</p>
+                        </div>
+                        <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-6">
+                          <Shield className="w-8 h-8 text-purple-400 mb-4" />
+                          <h3 className="text-lg font-semibold text-white mb-2">For ALX Team</h3>
+                          <p className="text-gray-400 text-sm">Manage requests, schedule events, maintain audit trails.</p>
+                        </div>
+                      </div>
 
-        {/* Requests Table */}
-        <div className="bg-white rounded-lg shadow">
-          <div className="p-6 border-b">
-            <h2 className="text-2xl font-bold">Partnership Requests</h2>
-            <p className="text-gray-600 mt-1">View and manage all partnership requests</p>
-          </div>
+                      <div className="bg-[#1a1a24] border border-white/10 rounded-lg p-6 my-6">
+                        <h3 className="text-lg font-semibold text-white mb-3">Key Capabilities</h3>
+                        <ul className="space-y-2 text-gray-300">
+                          <li className="flex items-start gap-2">
+                            <CheckCircle2 className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
+                            <span>Automated intake with validation and file uploads</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <CheckCircle2 className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
+                            <span>Smart calendar scheduling with conflict detection</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <CheckCircle2 className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
+                            <span>Role-based access control for team collaboration</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  )}
 
-          {loading ? (
-            <div className="p-12 text-center">
-              <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-gray-300 border-t-blue-600"></div>
-              <p className="mt-4 text-gray-600">Loading requests...</p>
-            </div>
-          ) : error ? (
-            <div className="p-12 text-center">
-              <p className="text-red-600">❌ {error}</p>
-            </div>
-          ) : requests.length === 0 ? (
-            <div className="p-12 text-center">
-              <Calendar className="w-16 h-16 mx-auto text-gray-300 mb-4" />
-              <p className="text-gray-600">No requests found</p>
-              <Link 
-                href="/apply"
-                className="mt-4 inline-block px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-              >
-                Submit First Request
-              </Link>
-            </div>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-gray-50 border-b">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Event</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Organization</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Type</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Hub</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Attendees</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200">
-                  {requests.map((request) => (
-                    <tr key={request.id} className="hover:bg-gray-50">
-                      <td className="px-6 py-4">
-                        <div>
-                          <div className="font-medium text-gray-900">{request.eventTitle}</div>
-                          <div className="text-sm text-gray-500">
-                            {request.startTime} - {request.endTime}
+                  {activeSection === 'requirements' && (
+                    <div>
+                      <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-6 mb-8">
+                        <div className="flex gap-3">
+                          <Clock className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" />
+                          <div>
+                            <h3 className="text-lg font-semibold text-yellow-400 mb-2">15-Day Advance Notice</h3>
+                            <p className="text-gray-300 text-sm">
+                              All requests must be submitted at least 15 business days before the event date.
+                            </p>
                           </div>
                         </div>
-                      </td>
-                      <td className="px-6 py-4">
-                        <div>
-                          <div className="text-sm font-medium text-gray-900">{request.partner.orgName}</div>
-                          <div className="text-sm text-gray-500">{request.partner.pocEmail}</div>
+                      </div>
+
+                      <div className="space-y-4">
+                        <div className="bg-[#1a1a24] border border-white/10 rounded-lg p-5">
+                          <h3 className="text-lg font-semibold text-white mb-3">Required Documents</h3>
+                          <ul className="space-y-2 text-gray-300 text-sm">
+                            <li className="flex items-start gap-2">
+                              <CheckCircle2 className="w-4 h-4 text-green-400 mt-0.5" />
+                              <span><strong>Concept Note</strong>: PDF format, max 5MB</span>
+                            </li>
+                            <li className="flex items-start gap-2">
+                              <CheckCircle2 className="w-4 h-4 text-green-400 mt-0.5" />
+                              <span><strong>Logo (Optional)</strong>: PNG/JPEG, max 2MB</span>
+                            </li>
+                          </ul>
                         </div>
-                      </td>
-                      <td className="px-6 py-4">
-                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getTypeColor(request.partnershipType)}`}>
-                          {request.partnershipType}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-900">{request.hub.name}</td>
-                      <td className="px-6 py-4 text-sm text-gray-900">
-                        {new Date(request.requestedDate).toLocaleDateString()}
-                      </td>
-                      <td className="px-6 py-4">
-                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(request.status)}`}>
-                          {request.status}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-900">{request.attendeeCount}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
+                      </div>
+                    </div>
+                  )}
+
+                  {activeSection === 'security' && (
+                    <div>
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div className="bg-[#1a1a24] border border-white/10 rounded-lg p-6">
+                          <h3 className="text-lg font-semibold text-white mb-3">Encryption</h3>
+                          <ul className="space-y-2 text-sm text-gray-300">
+                            <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 text-green-400 mt-0.5" />TLS 1.3 encryption</li>
+                            <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 text-green-400 mt-0.5" />AES-256 at rest</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </main>
+          </div>
         </div>
-      </div>
       </div>
     </div>
   );
