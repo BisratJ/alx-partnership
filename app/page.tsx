@@ -5,37 +5,6 @@ import { HeroSection } from '@/components/ui/hero-section-dark';
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#0a0a0f]">
-      {/* Navigation */}
-      <nav className="border-b border-white/5 bg-black/50 backdrop-blur-xl sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="relative">
-              <Building2 className="h-8 w-8 text-indigo-400 group-hover:text-indigo-300 transition-all duration-300 group-hover:scale-110" />
-              <div className="absolute -inset-1 bg-indigo-500/20 rounded-full blur opacity-0 group-hover:opacity-50 transition-opacity"></div>
-            </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-              ALX Partnership
-            </span>
-          </Link>
-          <div className="flex items-center gap-3">
-            <Link href="/track" className="px-4 py-2 text-gray-400 hover:text-white transition-all duration-300 font-medium relative group">
-              <span>Track</span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-500 group-hover:w-full transition-all duration-300"></span>
-            </Link>
-            <Link href="/apply" className="px-4 py-2 text-gray-400 hover:text-white transition-all duration-300 font-medium relative group">
-              <span>Apply</span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-500 group-hover:w-full transition-all duration-300"></span>
-            </Link>
-            <Link href="/dashboard">
-              <button className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-semibold transition-all duration-300 flex items-center gap-2">
-                Dashboard
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </Link>
-          </div>
-        </div>
-      </nav>
-
       {/* Hero Section with Retro Grid */}
       <HeroSection
         title="Welcome to Our Platform"
