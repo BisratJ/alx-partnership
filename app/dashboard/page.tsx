@@ -84,9 +84,9 @@ export default function DashboardPage() {
   };
 
   return (
-    <>
+    <div className="min-h-screen bg-[#0a0a0f]">
       <NavBar items={navItems} />
-      <div className="min-h-screen bg-[#0a0a0f] pt-28 pb-12">
+      <div className="pt-28 pb-12">
         <div className="container mx-auto px-4 py-8">
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
@@ -218,7 +218,7 @@ export default function DashboardPage() {
           )}
         </div>
       </div>
+      </div>
     </div>
-    </>
   );
 }

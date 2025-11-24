@@ -105,9 +105,9 @@ export default function TrackPage() {
   };
 
   return (
-    <>
+    <div className="min-h-screen bg-[#0a0a0f]">
       <NavBar items={navItems} />
-      <div className="min-h-screen bg-[#0a0a0f] py-12 pt-28">
+      <div className="py-12 pt-28">
         <div className="container mx-auto px-4 max-w-4xl">
           <Link 
             href="/"
@@ -373,7 +373,7 @@ export default function TrackPage() {
           )}
         </div>
       </div>
+      </div>
     </div>
-    </>
   );
 }

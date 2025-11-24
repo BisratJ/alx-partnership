@@ -13,7 +13,7 @@ export default function HomePage() {
   ];
 
   return (
-    <>
+    <div className="min-h-screen bg-[#0a0a0f]">
       <NavBar items={navItems} />
       <div className="mt-20">
         <HeroSection
@@ -35,6 +35,6 @@ export default function HomePage() {
           }}
         />
       </div>
-    </>
+    </div>
   );
 }
