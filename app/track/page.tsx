@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Search, CheckCircle2, Clock, XCircle, Calendar, Building2, Users, MapPin, ArrowLeft } from 'lucide-react';
+import { Search, CheckCircle2, Clock, XCircle, Calendar, Building2, Users, MapPin, ArrowLeft, Home, FileText, LayoutDashboard } from 'lucide-react';
+import { NavBar } from '@/components/ui/tubelight-navbar';
 
 interface RequestDetails {
   id: string;
@@ -30,6 +31,13 @@ export default function TrackPage() {
   const [loading, setLoading] = useState(false);
   const [request, setRequest] = useState<RequestDetails | null>(null);
   const [error, setError] = useState('');
+
+  const navItems = [
+    { name: 'Home', url: '/', icon: Home },
+    { name: 'Apply', url: '/apply', icon: FileText },
+    { name: 'Track', url: '/track', icon: Search },
+    { name: 'Dashboard', url: '/dashboard', icon: LayoutDashboard }
+  ];
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -97,13 +105,15 @@ export default function TrackPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-12">
-      <div className="container mx-auto px-4 max-w-4xl">
-        <Link 
-          href="/"
-          className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 mb-6"
-        >
-          <ArrowLeft className="w-4 h-4" />
+    <>
+      <NavBar items={navItems} />
+      <div className="min-h-screen bg-[#0a0a0f] py-12 pt-28">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <Link 
+            href="/"
+            className="inline-flex items-center gap-2 text-gray-400 hover:text-white mb-6 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
           Back to Home
         </Link>
 
@@ -364,5 +374,6 @@ export default function TrackPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

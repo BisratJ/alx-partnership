@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Building2, Calendar, Users, Clock, ArrowLeft } from 'lucide-react';
+import { Building2, Calendar, Users, Clock, ArrowLeft, Home, FileText, Search, LayoutDashboard } from 'lucide-react';
+import { NavBar } from '@/components/ui/tubelight-navbar';
 
 interface Request {
   id: string;
@@ -27,6 +28,13 @@ export default function DashboardPage() {
   const [requests, setRequests] = useState<Request[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+
+  const navItems = [
+    { name: 'Home', url: '/', icon: Home },
+    { name: 'Apply', url: '/apply', icon: FileText },
+    { name: 'Track', url: '/track', icon: Search },
+    { name: 'Dashboard', url: '/dashboard', icon: LayoutDashboard }
+  ];
 
   useEffect(() => {
     loadRequests();
@@ -76,25 +84,10 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <nav className="bg-white border-b">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <Building2 className="h-8 w-8 text-blue-600" />
-            <span className="text-xl font-bold">ALX Partnership Dashboard</span>
-          </div>
-          <Link 
-            href="/"
-            className="text-sm text-gray-600 hover:text-blue-600 flex items-center gap-2"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Home
-          </Link>
-        </div>
-      </nav>
-
-      <div className="container mx-auto px-4 py-8">
+    <>
+      <NavBar items={navItems} />
+      <div className="min-h-screen bg-[#0a0a0f] pt-28 pb-12">
+        <div className="container mx-auto px-4 py-8">
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <div className="bg-white rounded-lg shadow p-6">
@@ -226,5 +219,6 @@ export default function DashboardPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

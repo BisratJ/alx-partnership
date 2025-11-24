@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Loader2, CheckCircle2, Upload, AlertCircle, ArrowLeft } from 'lucide-react';
+import { Loader2, CheckCircle2, Upload, AlertCircle, ArrowLeft, Home, FileText, Search, LayoutDashboard } from 'lucide-react';
+import { NavBar } from '@/components/ui/tubelight-navbar';
 
 export default function ApplyPage() {
   const router = useRouter();
@@ -12,6 +13,13 @@ export default function ApplyPage() {
     concept?: File;
     logo?: File;
   }>({});
+
+  const navItems = [
+    { name: 'Home', url: '/', icon: Home },
+    { name: 'Apply', url: '/apply', icon: FileText },
+    { name: 'Track', url: '/track', icon: Search },
+    { name: 'Dashboard', url: '/dashboard', icon: LayoutDashboard }
+  ];
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -49,16 +57,18 @@ export default function ApplyPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] py-12">
-      <div className="container mx-auto px-4 max-w-3xl">
-        {/* Back Button */}
-        <Link 
-          href="/"
-          className="inline-flex items-center gap-2 text-gray-400 hover:text-white mb-6 transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to Home
-        </Link>
+    <>
+      <NavBar items={navItems} />
+      <div className="min-h-screen bg-[#0a0a0f] py-12 pt-28">
+        <div className="container mx-auto px-4 max-w-3xl">
+          {/* Back Button */}
+          <Link 
+            href="/"
+            className="inline-flex items-center gap-2 text-gray-400 hover:text-white mb-6 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Home
+          </Link>
 
         <div className="bg-[#13131a] rounded-2xl border border-white/5 p-8">
           <h1 className="text-3xl font-bold mb-2 text-white">Partnership Application</h1>
@@ -395,5 +405,6 @@ export default function ApplyPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }
