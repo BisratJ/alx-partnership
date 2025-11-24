@@ -9,7 +9,7 @@ export default function HomePage() {
     { name: 'Home', url: '/', icon: Home },
     { name: 'Apply', url: '/apply', icon: FileText },
     { name: 'Track', url: '/track', icon: Search },
-    { name: 'Dashboard', url: '/dashboard', icon: LayoutDashboard }
+    { name: 'Docs', url: '/dashboard', icon: LayoutDashboard }
   ];
 
   return (
