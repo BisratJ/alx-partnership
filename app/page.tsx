@@ -15,26 +15,25 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#0a0a0f]">
       <NavBar items={navItems} />
-      <div className="mt-20">
-        <HeroSection
-          title="Welcome to Our Platform"
-          subtitle={{
-            regular: "Transform your ideas into ",
-            gradient: "beautiful digital experiences",
-          }}
-          description="Transform your ideas into reality with our comprehensive suite of development tools and resources."
-          ctaText="Get Started"
-          ctaHref="/apply"
-          bottomImage={undefined}
-          gridOptions={{
-            angle: 65,
-            opacity: 0.4,
-            cellSize: 50,
-            lightLineColor: "#4a4a4a",
-            darkLineColor: "#2a2a2a",
-          }}
-        />
-      </div>
+      <HeroSection
+        title="Welcome to Our Platform"
+        subtitle={{
+          regular: "Transform your ideas into ",
+          gradient: "beautiful digital experiences",
+        }}
+        description="Transform your ideas into reality with our comprehensive suite of development tools and resources."
+        ctaText="Get Started"
+        ctaHref="/apply"
+        bottomImage={undefined}
+        gridOptions={{
+          angle: 65,
+          opacity: 0.4,
+          cellSize: 50,
+          lightLineColor: "#4a4a4a",
+          darkLineColor: "#2a2a2a",
+        }}
+        className="pt-20"
+      />
     </div>
   );
 }
