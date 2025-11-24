@@ -18,10 +18,10 @@ export default function HomePage() {
 
   const sections = [
     { id: 'overview', label: 'Overview', icon: BookOpen },
-    { id: 'features', label: 'Key Features', icon: Zap },
+    { id: 'features', label: 'Benefits & Levels', icon: Zap },
     { id: 'process', label: 'Partnership Process', icon: Users },
-    { id: 'requirements', label: 'Requirements', icon: CheckCircle2 },
-    { id: 'security', label: 'Security', icon: Shield },
+    { id: 'requirements', label: 'Criteria', icon: CheckCircle2 },
+    { id: 'security', label: 'Brand Guidelines', icon: Shield },
   ];
 
   return (
