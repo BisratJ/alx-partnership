@@ -49,38 +49,38 @@ export default function ApplyPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-12">
+    <div className="min-h-screen bg-[#0a0a0f] py-12">
       <div className="container mx-auto px-4 max-w-3xl">
         {/* Back Button */}
         <Link 
           href="/"
-          className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 mb-6"
+          className="inline-flex items-center gap-2 text-gray-400 hover:text-white mb-6 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Home
         </Link>
 
-        <div className="bg-white rounded-2xl shadow-xl p-8">
-          <h1 className="text-3xl font-bold mb-2">Partnership Application</h1>
-          <p className="text-gray-600 mb-8">
+        <div className="bg-[#13131a] rounded-2xl border border-white/5 p-8">
+          <h1 className="text-3xl font-bold mb-2 text-white">Partnership Application</h1>
+          <p className="text-gray-400 mb-8">
             Complete the form below to submit your partnership request. All fields marked with * are required.
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-8">
             {/* Partner Information */}
             <section>
-              <h2 className="text-xl font-semibold mb-4 text-blue-600">Partner Information</h2>
+              <h2 className="text-xl font-semibold mb-4 text-indigo-400">Partner Information</h2>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Organization Name <span className="text-red-500">*</span>
+                  <label className="block text-sm font-medium mb-1 text-gray-300">
+                    Organization Name <span className="text-red-400">*</span>
                   </label>
                   <input
                     type="text"
                     name="org_name"
                     required
                     maxLength={150}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-4 py-2 bg-black/30 border border-white/10 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-white placeholder:text-gray-500"
                     placeholder="Your organization name"
                   />
                 </div>
