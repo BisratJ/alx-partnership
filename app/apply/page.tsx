@@ -68,7 +68,7 @@ export default function ApplyPage() {
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || 'Submission failed');
 
-      alert(\`Application submitted!\\nReference ID: \${data.requestId}\`);
+      alert("Application submitted!\nReference ID: " + data.requestId);
       setFormData({
         org_name: '', poc_name: '', poc_email: '', poc_phone: '', org_url: '',
         event_title: '', event_desc: '', partnership_type: '', target_hub: '',
@@ -79,7 +79,7 @@ export default function ApplyPage() {
       setCurrentStep(1);
       router.push('/');
     } catch (error: any) {
-      alert(\`Error: \${error.message || 'Failed to submit'}\`);
+      alert("Error: " + (error.message || "Failed to submit"));
     } finally {
       setLoading(false);
     }
