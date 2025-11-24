@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Confirmed</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+    .content { background: #ffffff; padding: 30px; border: 1px solid #e5e7eb; border-top: none; }
+    .footer { background: #f9fafb; padding: 20px; text-align: center; border-radius: 0 0 8px 8px; font-size: 12px; color: #6b7280; }
+    .event-details { background: #ecfdf5; border: 2px solid #10b981; border-radius: 8px; padding: 20px; margin: 20px 0; }
+    .detail-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #d1fae5; }
+    .detail-row:last-child { border-bottom: none; }
+    .detail-label { font-weight: bold; color: #065f46; }
+    h1 { margin: 0; font-size: 24px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>✅ Event Confirmed!</h1>
+    </div>
+    
+    <div class="content">
+      <p>Dear <strong>{{pocName}}</strong>,</p>
+      
+      <p>Great news! Your partnership event has been confirmed and scheduled.</p>
+      
+      <div class="event-details">
+        <h3 style="margin-top: 0; color: #065f46;">📅 Event Details</h3>
+        
+        <div class="detail-row">
+          <span class="detail-label">Event:</span>
+          <span>{{eventTitle}}</span>
+        </div>
+        
+        <div class="detail-row">
+          <span class="detail-label">Date & Time:</span>
+          <span>{{startDatetime}}</span>
+        </div>
+        
+        <div class="detail-row">
+          <span class="detail-label">End Time:</span>
+          <span>{{endDatetime}}</span>
+        </div>
+        
+        <div class="detail-row">
+          <span class="detail-label">Location:</span>
+          <span>{{hubName}}</span>
+        </div>
+        
+        {{#if hubAddress}}
+        <div class="detail-row">
+          <span class="detail-label">Address:</span>
+          <span>{{hubAddress}}</span>
+        </div>
+        {{/if}}
+      </div>
+      
+      <p><strong>Next Steps:</strong></p>
+      <ul>
+        <li>Save this date on your calendar</li>
+        <li>Prepare any materials needed for the event</li>
+        <li>Arrive 15 minutes early for setup</li>
+        <li>Follow ALX co-branding guidelines</li>
+      </ul>
+      
+      <p><strong>Important:</strong> If you need to cancel or reschedule, please notify us at least 48 hours in advance.</p>
+      
+      <p>We're excited to partner with you!</p>
+      
+      <p>Best regards,<br><strong>The ALX Partnership Team</strong></p>
+    </div>
+    
+    <div class="footer">
+      <p>&copy; {{current_year}} ALX Africa. All rights reserved.</p>
+      <p>📍 Questions? Contact us at partnerships@alxafrica.com</p>
+    </div>
+  </div>
+</body>
+</html>
