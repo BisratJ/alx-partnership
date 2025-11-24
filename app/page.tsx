@@ -6,17 +6,24 @@ export default function HomePage() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Navigation */}
       <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+        <div className="container mx-auto px-4 py-6 flex justify-between items-center">
           <div className="flex items-center gap-2">
             <Building2 className="h-8 w-8 text-blue-600" />
-            <span className="text-xl font-bold">ALX Partnership</span>
+            <span className="text-2xl font-bold text-gray-900">ALX Partnership</span>
           </div>
-          <Link 
-            href="/dashboard"
-            className="px-4 py-2 text-sm font-medium text-blue-600 hover:text-blue-700 transition"
-          >
-            Staff Login →
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link href="/track" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">
+              Track
+            </Link>
+            <Link href="/apply" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">
+              Apply
+            </Link>
+            <Link href="/dashboard">
+              <button className="px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                Dashboard
+              </button>
+            </Link>
+          </div>
         </div>
       </nav>
 
@@ -32,17 +39,15 @@ export default function HomePage() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
-            <Link 
-              href="/apply"
-              className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
-            >
-              Apply for Partnership
+            <Link href="/apply">
+              <button className="px-8 py-4 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-50 transition-colors shadow-lg">
+                Apply for Partnership
+              </button>
             </Link>
-            <Link 
-              href="/track"
-              className="px-8 py-4 bg-white hover:bg-gray-50 text-gray-900 font-semibold rounded-lg border-2 border-gray-300 hover:border-gray-400 transition-all"
-            >
-              Track Application
+            <Link href="/track">
+              <button className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors">
+                Track Application
+              </button>
             </Link>
           </div>
         </div>
