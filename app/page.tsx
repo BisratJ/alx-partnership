@@ -38,24 +38,21 @@ export default function HomePage() {
 
       {/* Hero Section with Retro Grid */}
       <HeroSection
-        title="Partner with ALX Africa"
+        title="Welcome to Our Platform"
         subtitle={{
-          regular: "Transform tech education in Africa with ",
-          gradient: "strategic partnerships",
+          regular: "Transform your ideas into ",
+          gradient: "beautiful digital experiences",
         }}
-        description="Submit partnership requests, track your application status in real-time, and collaborate with our team through our streamlined portal."
-        ctaText="Apply for Partnership"
+        description="Transform your ideas into reality with our comprehensive suite of development tools and resources."
+        ctaText="Get Started"
         ctaHref="/apply"
-        bottomImage={{
-          light: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&h=675&fit=crop&auto=format&q=80",
-          dark: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&h=675&fit=crop&auto=format&q=80",
-        }}
+        bottomImage={undefined}
         gridOptions={{
           angle: 65,
           opacity: 0.3,
           cellSize: 60,
-          lightLineColor: "#6366f1",
-          darkLineColor: "#4f46e5",
+          lightLineColor: "#4a4a4a",
+          darkLineColor: "#2a2a2a",
         }}
       />
 
