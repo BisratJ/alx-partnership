@@ -1,3 +1,5 @@
+"use client"
+
 import { HeroSection } from '@/components/ui/hero-section-dark';
 import { NavBar } from '@/components/ui/tubelight-navbar';
 import { Home, FileText, Search, LayoutDashboard } from 'lucide-react';
