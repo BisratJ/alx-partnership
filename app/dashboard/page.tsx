@@ -39,11 +39,11 @@ export default function DashboardPage() {
                       <button
                         key={section.id}
                         onClick={() => setActiveSection(section.id)}
-                        className={\`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all \${
+                        className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
                           activeSection === section.id
                             ? 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20'
                             : 'text-gray-400 hover:text-white hover:bg-white/5'
-                        }\`}
+                        }`}
                       >
                         <Icon className="w-4 h-4" />
                         {section.label}
